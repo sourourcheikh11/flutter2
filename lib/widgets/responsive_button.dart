@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:projet1/pages/misc/colors.dart';
 
 class ResponsiveButton extends StatefulWidget {
   bool? isResponsive;
@@ -16,9 +17,15 @@ class _ResponsiveButtonState extends State<ResponsiveButton> {
     return Container(
       width: widget.width,
       height: 60,
-      child: Row(
+      decoration:BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        color: AppColors.mainColor
+      ),
+       child: Row(
+         mainAxisAlignment:MainAxisAlignment.center,
         children: [
-          Image.asset("img/b1.png")
+          Expanded(child: Image.asset("img/b1.png")),
+
         ],
       ),
     );

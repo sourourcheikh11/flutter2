@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:projet1/widgets/app_large_text.dart';
+import 'package:projet1/widgets/responsive_button.dart';
 
 import '../widgets/app_text.dart';
 import 'misc/colors.dart';
@@ -48,12 +49,29 @@ class _WelcomePageState extends State<WelcomePage> {
                         child: AppText(text: "Les randonnées en montagne offrent une sensation extraordinaire de liberté tout en constituant un véritable test d'endurance.",
                         color:AppColors.textColor2,
                         size: 14,),
-                      )
+                      ),
+                          SizedBox(height :40,),
+                          ResponsiveButton(width: 120,),
 
                     ],
-                  )],
+                  ),
+                  Column(
+                    children: List.generate(3, (indexDots) {
+                      return Container(
+                        margin:const EdgeInsets.only(bottom: 2),
+                        width: 8,
+                        height:index==indexDots? 25:8,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          color:index==indexDots?AppColors.mainColor:AppColors.mainColor.withOpacity(0.3)
+                        ),
+                      );
+                    }),
+              )
+              ],
+                  )
                 ),
-              ),
+
             );
 
       }),
