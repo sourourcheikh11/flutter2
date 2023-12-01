@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:projet1/pages/misc/colors.dart';
+import 'package:projet1/widgets/app_text.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}): super(key :key);
@@ -9,7 +11,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin{
-@override
+var images={
+"balloning.png":"Balloning",
+  "hiking.png":"Hiking",
+  "kayaking.png":"kayaking",
+  "snorkling.png":"snorlking"
+};
+  @override
   Widget build(BuildContext context) {
   TabController _tabController = TabController(length: 3, vsync: this);
 
@@ -43,14 +51,23 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin{
           // Using the AppLargeText widget with a sample text.
           SizedBox(height:30,),
           Container(
-            child: TabBar(
-              controller:_tabController ,
-              tabs: [
-                Tab(text: "Places"),
-                Tab(text:"Inspiration"),
-                Tab(text: "Emotions"),
-
-              ],
+            child: Align(
+              alignment:Alignment.centerLeft ,
+              child: TabBar(
+                labelPadding: const EdgeInsets.only(left:20,right: 20),
+                controller:_tabController ,
+                labelColor: Colors.black,
+                unselectedLabelColor:Colors.grey ,
+                isScrollable: true,
+                indicatorSize: TabBarIndicatorSize.label,
+                indicator: CircleTabIndicator(color: AppColors.mainColor , radius: 4),
+                tabs: [
+                  Tab(text: "Places"),
+                  Tab(text:"Inspiration"),
+                  Tab(text: "Emotions"),
+              
+                ],
+              ),
             ),
           ),
           Container(
@@ -60,11 +77,89 @@ width: double.maxFinite,
 child: TabBarView(
   controller:_tabController ,
   children: [
+    ListView.builder(
+      itemCount:3,
+      scrollDirection: Axis.horizontal,
+      itemBuilder :(BuildContext context , int index) {
+        return
+          Container(
+            margin: const EdgeInsets.only(right: 15 ,top:10),
+            padding: const EdgeInsets.only(left :20),
+            width: 200,
+            height: 300,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: Colors.white,
+                image: DecorationImage(
+                    image: AssetImage(
+                        "img/mountain.jpg"
+                    ),
+                    fit: BoxFit.cover
+                )
+            ),
+          );
+      },
+    ),
     Text("Hi"),
     Text("There"),
     Text('BYE')
   ],
 )
+          ),
+          SizedBox(height:30,),
+          Container(
+            margin: const EdgeInsets.only(left: 20, right: 20),
+
+          child : Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              AppLargeText(text: "Explore more"),
+              AppText(text: "See all", color:AppColors.textColor1 ,)
+            ],
+          )
+          ),
+          SizedBox(height: 10,),
+          Container(
+            height:100,
+            width: double.maxFinite,
+            margin: const EdgeInsets.only(left: 20) ,
+            child:ListView.builder(
+                itemCount: 4,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (_, index){
+           return Container(
+             margin: const EdgeInsets.only(right: 30),
+             child: Column(
+               children: [
+             Container(
+
+                       // margin: const EdgeInsets.only(right: 50),
+                    padding: const EdgeInsets.only(left :20),
+                    width: 80,
+                    height: 80,
+                    decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Colors.white,
+                    image: DecorationImage(
+                    image: AssetImage(
+                    "img/"+images.keys.elementAt(index)
+                    ),
+                    fit: BoxFit.cover
+                    )
+                    ),
+                    ),
+
+             Container(
+               child: AppText(
+                 text :images.values.elementAt(index),
+                 color: AppColors.textColor2,
+               ),
+             )
+               ],
+             ),
+           );
+  }
+          ),
           )
         ],
       ),
@@ -88,4 +183,32 @@ class AppLargeText extends StatelessWidget {
       ),
     );
   }
+}
+class CircleTabIndicator extends Decoration{
+   late final Color color;
+   late double radius;
+   CircleTabIndicator({ required this.color , required this.radius});
+
+  @override
+  BoxPainter createBoxPainter([VoidCallback? onChanged]) {
+   return _CirclePainter(color:color,radius:radius);
+  }
+}
+class _CirclePainter extends BoxPainter{
+  late final Color color;
+  late double radius;
+  _CirclePainter({ required this.color , required this.radius});
+
+  @override
+  void paint(Canvas canvas, Offset offset,
+      ImageConfiguration configuration) {
+    Paint _paint= Paint();
+    _paint.color=color;
+    _paint.isAntiAlias=true;
+    final Offset circleOffset=Offset(configuration.size!.width/2 -radius/2, configuration.size!.height-radius);
+
+    canvas.drawCircle(offset+circleOffset, radius, _paint);
+    // TODO: implement paint
+  }
+  
 }
