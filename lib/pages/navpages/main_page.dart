@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:projet1/pages/navpages/bar_item_page.dart';
 import 'package:projet1/pages/navpages/my_page.dart';
 
-import 'home_page.dart';
+import '../home_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
