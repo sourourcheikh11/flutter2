@@ -13,7 +13,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin{
 var images={
 "balloning.png":"Balloning",
-  "hiking.png":"Hiking",
+  "hiking.jpg":"Hiking",
   "kayaking.png":"kayaking",
   "snorkling.png":"snorlking"
 };
