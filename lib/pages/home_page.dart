@@ -120,7 +120,7 @@ child: TabBarView(
           ),
           SizedBox(height: 10,),
           Container(
-            height:100,
+            height:200,
             width: double.maxFinite,
             margin: const EdgeInsets.only(left: 20) ,
             child:ListView.builder(
